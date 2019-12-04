@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
 					if (page == "home") {
 						content.append = eval($('.parallax').parallax());
 						getCompetitions();
+					} else if (page == "saved") {
+						getSavedTeam();
 					}
 				} else if (this.status == 404) {
 					content.innerHTML = "<p>Halaman tidak ditemukan.</p>";

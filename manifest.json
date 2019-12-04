@@ -14,5 +14,6 @@
         "src": "./icons/icon-192x192.png",
         "type": "image/png",
         "sizes": "192x192"
-    }]
+    }],
+    "gcm_sender_id": "988799844009"
 }

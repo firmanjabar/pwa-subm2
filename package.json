@@ -1,0 +1,23 @@
+{
+  "name": "submission2",
+  "version": "1.0.0",
+  "description": "\u0000#\u0000 \u0000p\u0000w\u0000a\u0000-\u0000s\u0000u\u0000b\u0000m\u00002\u0000\r\u0000 \u0000",
+  "main": "push.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firmanjabar/pwa-subm2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/firmanjabar/pwa-subm2/issues"
+  },
+  "homepage": "https://github.com/firmanjabar/pwa-subm2#readme",
+  "dependencies": {
+    "web-push": "^3.4.2"
+  }
+}

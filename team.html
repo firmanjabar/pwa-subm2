@@ -35,6 +35,7 @@
     </nav>
     <!-- Akhir Navigasi -->
 
+    <!-- Content -->
     <div class="container" id="body-content">
         <div class="col s12">
             <h4 class="center-align">Detail Team</h4>
@@ -75,10 +76,27 @@
         </div>
         <br>
     </div>
+    <!-- Akhir Content -->
 
+    <div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red darken-3" id="delete">
+                <i class="large material-icons">delete</i>
+            </a>
+        </div>
+
+        <div class="fixed-action-btn">
+            <button class="btn-floating btn-large indigo darken-4 pulse" id="save">
+                <i class="large material-icons">save</i>
+            </button>
+        </div>
+    </div>
 
     <script src="js/materialize.min.js"></script>
     <script src="js/api.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/idb/lib/idb.js"></script>
+    <script src="js/ruang_bola_db.js"></script>
     <script>
         // REGISTER SERVICE WORKER
         if ("serviceWorker" in navigator) {
@@ -97,13 +115,56 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            getTeam();
-            getLastMatch();
             getNextMatch();
+            getLastMatch();
 
             // COLLAPSE
             var collapse = document.querySelectorAll('.collapsible');
             M.Collapsible.init(collapse);
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var isFromSaved = Number(urlParams.get("saved"));
+            var forDelete = Number(urlParams.get("id"));
+
+            checkFavorite(forDelete);
+
+            var save = document.getElementById("save");
+            var del = document.getElementById("delete");
+
+            if (isFromSaved) {
+                // Hide fab jika dimuat dari indexed db
+                save.style.display = 'none';
+                // ambil artikel lalu tampilkan
+                getSavedTeam();
+            } else {
+                var item = getTeam();
+                // console.log(item);
+                // console.log('halo');
+            }
+
+            checkFavorite(forDelete).then((msg) => {
+                save.style.display = "none";
+                del.style.display = "block";
+            }).catch((msg) => {
+                save.style.display = "block";
+                del.style.display = "none";
+            });
+
+            save.onclick = function () {
+                console.log("Tombol save di klik.");
+                item.then(function (team) {
+                    saveFavTeam(team);
+                });
+                save.style.display = "none";
+                del.style.display = "block";
+            };
+
+            del.onclick = function () {
+                console.log("Tombol delete di klik.");
+                deleteFavTeam(forDelete);
+                del.style.display = "none";
+                save.style.display = "block";
+            };
         });
     </script>
 </body>
